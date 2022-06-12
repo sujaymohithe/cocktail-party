@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
-import { ModalSize } from "../../types/types";
 
 interface Props {
   title: string;
