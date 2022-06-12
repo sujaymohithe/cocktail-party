@@ -1,13 +1,13 @@
 import { Ingredient, Cocktail } from "../types/types";
+import { requestUrl } from "../utils/network";
 
 class APIService {
   /**
-   *get all ingredients and each ingredients details
+   * Method to get all ingredients with details
+   * @returns Promise : all ingredients
    */
   static getIngredients(): Promise<Ingredient[] | null> {
-    return fetch(
-      "https://us-central1-nexible-code.cloudfunctions.net/ingredients"
-    )
+    return fetch(`${requestUrl}ingredients`)
       .then((response) => {
         return response.json();
       })
@@ -17,10 +17,12 @@ class APIService {
       });
   }
 
+  /**
+   * Method to get all cocktails with it's ingredients
+   * @returns Promise : all cocktails
+   */
   static getCocktails(): Promise<Cocktail[] | null> {
-    return fetch(
-      "https://us-central1-nexible-code.cloudfunctions.net/cocktails"
-    )
+    return fetch(`${requestUrl}/cocktails`)
       .then((response) => {
         return response.json();
       })

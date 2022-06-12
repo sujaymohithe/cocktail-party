@@ -1,4 +1,5 @@
 class localStorageService {
+  // get item
   static getItem = (key: string) => {
     try {
       const data = localStorage.getItem(key);
@@ -12,11 +13,11 @@ class localStorageService {
     }
   };
 
-  // set
+  // set item
   static setItem = (key: string, data: any) =>
     localStorage.setItem(key, JSON.stringify(data));
 
-  // remove
+  // remove item
   static removeToken = (key: string) => localStorage.removeItem(key);
 }
 
