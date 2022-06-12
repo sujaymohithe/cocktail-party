@@ -1,10 +1,21 @@
-# Getting Started with Create React App
+# My Cocktails party!
+
+### `ABOUT PROJECT`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+The application displays a list of possible cocktails that could be served to friends. There is an inventory or ingredients page to manage ingredients by adding a new ingredient or editing an ingredient or deleting an ingredient.
+In cocktails page, it displays a list of cocktails and it's ingredients required to be prepared.
+- If all ingredients are present for a particular cocktail, it is displayed as 'can be prepared'  
+- If some of the ingredients are absent for a particular cocktail, it is displayed as 'cannot be prepared'
+
+## Steps to run project
 
 In the project directory, you can run:
+
+### `npm install` on frontend folder
+
+Navigate to frontend folder and run npm install to install required packages
 
 ### `npm start`
 
@@ -14,33 +25,26 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Other Details
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `create-react-app`
+Application is built from scratch using command `npx create-react-app frontend --template typescript
 
-### `npm run eject`
+### `react-bootstap`
+- react-bootstap is used for styling and layout.
+- Simple UI is designed as per the task assignment
+- Responsive UI is achieved using react-bootstrap and SASS
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### `API data`
+The application is fetching data from API https://us-central1-nexible-code.cloudfunctions.net/ 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `Testing`
+Test cases are not included due to time constraint
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `Local Storage`
+Browser local storage is used for state management
