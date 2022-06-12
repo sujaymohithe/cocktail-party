@@ -40,7 +40,7 @@ const IngredientList = ({
             <th>Name</th>
             <th>Is Alcoholic</th>
             <th>Expiry Date</th>
-            <th>Edit</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -57,10 +57,10 @@ const IngredientList = ({
                       : ""}
                   </td>
                   <td className="actions">
-                    <span>
+                    <span title="Edit">
                       <GrEdit onClick={() => handleEdit(ingredient)} />
                     </span>
-                    <span>
+                    <span title="Delete">
                       <AiFillDelete onClick={() => handleDelete(ingredient)} />
                     </span>
                   </td>

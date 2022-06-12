@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
+import React, { useState } from "react";
 import Navigation from "../components/Navigation/Navigation";
-import APIService from "../services/APIService";
 import CocktailsPage from "./CocktailsPage";
 import IngredientsPage from "./IngredientsPage";
 

@@ -7,6 +7,7 @@ import {
   invalid_date_msg,
   duplicate_ingredient,
   mandatory_ingredient_name,
+  ingredients
 } from "../../AppConstants";
 
 interface Props {
@@ -33,9 +34,9 @@ const AddIngredients = ({ onClose, onSave }: Props) => {
   };
 
   const handleAddNewIngredient = () => {
-    const ingredients: Ingredient[] =
-      localStorageService.getItem("ingredients");
-    const availableIngredients = ingredients.map((i) => i.name.toLowerCase());
+    const storeIngredients: Ingredient[] =
+      localStorageService.getItem(ingredients);
+    const availableIngredients = storeIngredients.map((i) => i.name.toLowerCase());
     if (!ingredientName.trim()) {
       setError([mandatory_ingredient_name]);
       return;

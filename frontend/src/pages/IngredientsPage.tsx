@@ -6,7 +6,12 @@ import IngredientList from "../components/Ingredients/IngredientList";
 import APIService from "../services/APIService";
 import localStorageService from "../services/localStorageService";
 import { Ingredient } from "../types/types";
+import { ingredients } from "../AppConstants";
 
+/**
+ * Page to render inventory/ingredients
+ * @returns JSX
+ */
 const IngredientsPage = () => {
   const [myIngredients, setMyIngredients] = useState<Ingredient[]>([]);
   const [selectedIngredient, setSelectedIngredient] = useState<
@@ -15,12 +20,12 @@ const IngredientsPage = () => {
   const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
-    const storedIngredients = localStorageService.getItem("ingredients");
+    const storedIngredients = localStorageService.getItem(ingredients);
     if (Object.keys(storedIngredients).length < 1) {
       APIService.getIngredients().then((data) => {
         //initially set localStorage
         if (data) {
-          localStorageService.setItem("ingredients", data);
+          localStorageService.setItem(ingredients, data);
           setMyIngredients(data);
         }
       });
@@ -38,7 +43,7 @@ const IngredientsPage = () => {
       (ingredient: Ingredient) => ingredient.name !== deletedIngredient.name
     );
     setMyIngredients(otherIngredients);
-    localStorageService.setItem("ingredients", otherIngredients);
+    localStorageService.setItem(ingredients, otherIngredients);
   };
 
   const handleOnCloseEditModal = () => {
@@ -47,7 +52,7 @@ const IngredientsPage = () => {
 
   const handleOnSaveIngredient = (ingredientDetails: Ingredient) => {
     let storedIngredients: Ingredient[] =
-      localStorageService.getItem("ingredients");
+      localStorageService.getItem(ingredients);
     const selectedIndex = storedIngredients.findIndex(
       (ingredient) => ingredient.name === ingredientDetails.name
     );
@@ -57,7 +62,7 @@ const IngredientsPage = () => {
       storedIngredients = [ingredientDetails, ...storedIngredients];
     }
     setMyIngredients(storedIngredients);
-    localStorageService.setItem("ingredients", storedIngredients);
+    localStorageService.setItem(ingredients, storedIngredients);
     //clear selected ingredient and to auto close edit modal
     setSelectedIngredient(undefined);
     setShowAddModal(false);
@@ -74,10 +79,9 @@ const IngredientsPage = () => {
   return (
     <div>
       <div className="add-item">
-        <Button
-          variant="primary"
-          onClick={handleAddNewIngredient}
-        >Add New Ingredient</Button>
+        <Button variant="primary" onClick={handleAddNewIngredient}>
+          Add New Ingredient
+        </Button>
       </div>
       <IngredientList
         data={myIngredients}

@@ -4,18 +4,23 @@ import localStorageService from "../../services/localStorageService";
 import { Cocktail, Ingredient } from "../../types/types";
 import { isExpired } from "../../utils/functions";
 import "./Cocktail.scss";
+import { ingredients } from "../../AppConstants";
 
 interface Props {
   data: Cocktail[];
+  availableIngredients: Ingredient[];
 }
 
-const CocktialList = ({ data }: Props) => {
-  const ingredients: Ingredient[] = localStorageService.getItem("ingredients");
+const CocktialList = ({ data, availableIngredients }: Props) => {
+  let storeIngredients: Ingredient[] = localStorageService.getItem(ingredients);
+  if (Object.keys(storeIngredients).length < 1) {
+    storeIngredients = availableIngredients;
+  }
 
   const checkCocktailPreparingStatus = (requiredIngredients: string[]) => {
     const missingIngredients = requiredIngredients.filter(
       (ri) =>
-        !ingredients.some(
+        !storeIngredients.some(
           (i) =>
             i.name.toLowerCase() === ri.toLowerCase() &&
             !isExpired(i.expiryDate)
