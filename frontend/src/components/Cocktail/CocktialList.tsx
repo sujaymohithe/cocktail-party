@@ -56,7 +56,11 @@ const CocktialList = ({ data }: Props) => {
                   </div>
                   <div className="ingredients-info warn">
                     <span>Missing Ingredients: </span>
-                    <span>{missingIngredients.join(", ")}</span>
+                    <span>
+                      {missingIngredients.length > 0
+                        ? missingIngredients.join(", ")
+                        : "None"}
+                    </span>
                   </div>
                 </div>
               </Col>

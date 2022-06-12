@@ -12,9 +12,10 @@ interface Props {
 }
 
 const EditIngredient = ({ ingredient, onSave, onClose }: Props) => {
-  const [editedExpiryDate, setEditedExpiryDate] = useState(
+  const [editedExpiryDate, setEditedExpiryDate] = useState<string | undefined>(
     ingredient.expiryDate
   );
+  const [isAlcoholic, setIsAlcoholic] = useState(ingredient.alcoholic);
   const [isError, setIsError] = useState(false);
 
   const handleOnEditSave = () => {
@@ -27,6 +28,7 @@ const EditIngredient = ({ ingredient, onSave, onClose }: Props) => {
     if (result) {
       const editedIngredientDetails = ingredient;
       editedIngredientDetails.expiryDate = editedExpiryDate;
+      editedIngredientDetails.alcoholic = isAlcoholic;
       onSave(editedIngredientDetails);
     } else {
       setIsError(true);
@@ -38,6 +40,10 @@ const EditIngredient = ({ ingredient, onSave, onClose }: Props) => {
     setEditedExpiryDate(event.target.value);
   };
 
+  const handleOnChangeCheckBox = () => {
+    setIsAlcoholic(!isAlcoholic);
+  };
+
   return (
     <ModalDialog
       title={ingredient.name}
@@ -45,6 +51,16 @@ const EditIngredient = ({ ingredient, onSave, onClose }: Props) => {
       onClose={onClose}
     >
       <div className="edit-container">
+        <div className="input-item">
+          <span>Is Alcoholic: </span>
+          <div className="input-checkbox">
+            <input
+              type="checkbox"
+              defaultChecked={isAlcoholic}
+              onChange={handleOnChangeCheckBox}
+            ></input>
+          </div>
+        </div>
         <div className="input-item">
           <span>Expiry Date: </span>
           <input
