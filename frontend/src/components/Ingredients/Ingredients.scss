@@ -1,0 +1,82 @@
+input {
+  width: 100%;
+}
+
+.edit-container {
+  display: flex;
+  flex-direction: column;
+
+  .input-item {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+
+    span {
+      width: 200px;
+    }
+  }
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+.actions {
+  height: 100%;
+  display: flex;
+  column-gap: 10%;
+
+  span {
+    cursor: pointer;
+  }
+}
+
+.add-item {
+  display: flex;
+  justify-content: flex-end;
+
+  input {
+    width: auto;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+  }
+}
+
+.add-container {
+  display: flex;
+  flex-direction: column;
+
+  .input-item {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+
+    span {
+      width: 200px;
+    }
+
+    .input-checkbox {
+      width: 100%;
+
+      input {
+        width: auto;
+      }
+    }
+  }
+}
+
+.ingredient-list {
+  padding-top: 10px;
+}
+
+.highlight{
+  color: red;
+}
+
+.mandatory{
+    color: red;
+}

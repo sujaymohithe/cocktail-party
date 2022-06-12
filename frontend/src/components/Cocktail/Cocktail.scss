@@ -1,0 +1,27 @@
+@use "../../styles/mixins";
+
+.cocktail-container {
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 5px;
+  height: 220px;
+
+  @include mixins.for-phone-and-tablet {
+    height: auto;
+  }
+}
+
+.col-grid {
+  margin-bottom: 10px;
+}
+
+.ingredients-info {
+  span:first-child {
+    font-weight: bold;
+    color: brown;
+  }
+}
+
+.warn {
+  padding-top: 10px;
+}

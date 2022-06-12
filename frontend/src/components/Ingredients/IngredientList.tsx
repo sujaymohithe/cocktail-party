@@ -1,16 +1,39 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import { Ingredient } from "../../types/types";
-
+import { AiFillDelete } from "react-icons/ai";
+import { GrEdit } from "react-icons/gr";
+import { isExpired } from "../../utils/functions";
 interface Props {
   data: Ingredient[];
+  onEditIngredient: (ingredient: Ingredient) => void;
+  onDeleteIngredient: (ingredient: Ingredient) => void;
 }
 
-const IngredientList = ({ data }: Props) => {
-  debugger;
+const IngredientList = ({
+  data,
+  onEditIngredient,
+  onDeleteIngredient,
+}: Props) => {
+  const handleEdit = (ingredient: Ingredient) => {
+    onEditIngredient(ingredient);
+  };
+
+  const handleDelete = (ingredient: Ingredient) => {
+    onDeleteIngredient(ingredient);
+  };
+
+  const populateExpiryDate = (expiryDt: string) => {
+    if (isExpired(expiryDt)) {
+      return <span className="highlight">{expiryDt}</span>;
+    } else {
+      return <span>{expiryDt}</span>;
+    }
+  };
+
   return (
-    <div>
-      <Table striped bordered hover>
+    <div className="ingredient-list">
+      <Table striped bordered hover responsive="sm">
         <thead>
           <tr>
             <th>#</th>
@@ -28,8 +51,19 @@ const IngredientList = ({ data }: Props) => {
                   <td>{index + 1}</td>
                   <td>{ingredient.name}</td>
                   <td>{ingredient.alcoholic ? "Yes" : "No"}</td>
-                  <td>{ingredient.expiryDate?? ""}</td>
-                  <td><input type="button" value="Edit"></input></td>
+                  <td>
+                    {ingredient.expiryDate
+                      ? populateExpiryDate(ingredient.expiryDate)
+                      : ""}
+                  </td>
+                  <td className="actions">
+                    <span>
+                      <GrEdit onClick={() => handleEdit(ingredient)} />
+                    </span>
+                    <span>
+                      <AiFillDelete onClick={() => handleDelete(ingredient)} />
+                    </span>
+                  </td>
                 </tr>
               );
             })}

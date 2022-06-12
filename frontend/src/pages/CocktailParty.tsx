@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Navigation from "../components/Navigation/Navigation";
 import APIService from "../services/APIService";
+import CocktailsPage from "./CocktailsPage";
 import IngredientsPage from "./IngredientsPage";
 
 export enum Page {
@@ -21,11 +22,13 @@ const CocktailParty = () => {
   };
   return (
     <div>
-      <Container>
+      <div className="main-container">
         <Navigation onSelectNav={handleNavSelection} />
-        {selectedPage === Page.Cocktails && <p>Cocktails</p>}
-        {selectedPage === Page.Ingredients && <IngredientsPage />}
-      </Container>
+        <div className="body-container">
+          {selectedPage === Page.Cocktails && <CocktailsPage />}
+          {selectedPage === Page.Ingredients && <IngredientsPage />}
+        </div>
+      </div>
     </div>
   );
 };

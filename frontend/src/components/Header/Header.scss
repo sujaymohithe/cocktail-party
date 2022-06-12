@@ -1,9 +1,12 @@
+@use "../../styles/base";
+
 .header-container {
-  background-color: bisque;
+  background-color: base.$primary-color;
   font-weight: bold;
   font-size: 22px;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: base.$white-color;
 }
