@@ -7,7 +7,7 @@ import {
   invalid_date_msg,
   duplicate_ingredient,
   mandatory_ingredient_name,
-  ingredients
+  ingredients,
 } from "../../AppConstants";
 
 interface Props {
@@ -25,28 +25,44 @@ const AddIngredients = ({ onClose, onSave }: Props) => {
     setIngredientName(event.target.value);
   };
 
+  /**
+   * Method to handle isAlcoholic checkbox change
+   */
   const handleOnChangeCheckBox = () => {
     setIsAlcoholic(!isAlcoholic);
   };
 
+  /**
+   * Method to handle expiry date input change
+   */
   const handleOnChangeExpiryDate = (event: React.BaseSyntheticEvent) => {
     setExpiryDate(event.target.value);
   };
 
+  /**
+   * Method to validate add new ingredient input form
+   * and to save after successful validation
+   */
   const handleAddNewIngredient = () => {
     const storeIngredients: Ingredient[] =
       localStorageService.getItem(ingredients);
-    const availableIngredients = storeIngredients.map((i) => i.name.toLowerCase());
+    const availableIngredients = storeIngredients.map((i) =>
+      i.name.toLowerCase()
+    );
+    // validation mandatory ingredient name
     if (!ingredientName.trim()) {
       setError([mandatory_ingredient_name]);
       return;
     }
+    // validation expiry date format
     if (expiryDate && !isDateValid(expiryDate)) {
       setError([invalid_date_msg]);
       return;
     }
+    // validation duplicate ingredient
     const isIngredientAlreadyAdded = availableIngredients.filter(
-      (ingredient) => ingredientName.trim().toLowerCase() === ingredient.toLowerCase()
+      (ingredient) =>
+        ingredientName.trim().toLowerCase() === ingredient.toLowerCase()
     );
     if (isIngredientAlreadyAdded.length > 0) {
       setError([duplicate_ingredient]);
@@ -68,7 +84,9 @@ const AddIngredients = ({ onClose, onSave }: Props) => {
     >
       <div className="add-container">
         <div className="input-item">
-          <span>Ingredient Name<span className="mandatory">*</span>: </span>
+          <span>
+            Ingredient Name<span className="mandatory">*</span>:{" "}
+          </span>
           <input
             type="text"
             value={ingredientName}

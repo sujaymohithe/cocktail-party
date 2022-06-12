@@ -15,14 +15,26 @@ const IngredientList = ({
   onEditIngredient,
   onDeleteIngredient,
 }: Props) => {
+  /**
+   * Method to pass selected edit ingredient
+   * @param ingredient
+   */
   const handleEdit = (ingredient: Ingredient) => {
     onEditIngredient(ingredient);
   };
 
+  /**
+   * Method to pass selected delete ingredient
+   * @param ingredient
+   */
   const handleDelete = (ingredient: Ingredient) => {
     onDeleteIngredient(ingredient);
   };
-
+  /**
+   * Method to highlight expired ingredient
+   * @param expiryDt Date
+   * @returns JSX
+   */
   const populateExpiryDate = (expiryDt: string) => {
     if (isExpired(expiryDt)) {
       return <span className="highlight">{expiryDt}</span>;

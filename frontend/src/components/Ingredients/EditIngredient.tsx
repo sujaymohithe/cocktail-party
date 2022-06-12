@@ -11,6 +11,10 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Component to render Edit Ingredient Modal
+ * @returns JSX
+ */
 const EditIngredient = ({ ingredient, onSave, onClose }: Props) => {
   const [editedExpiryDate, setEditedExpiryDate] = useState<string | undefined>(
     ingredient.expiryDate
@@ -19,27 +23,32 @@ const EditIngredient = ({ ingredient, onSave, onClose }: Props) => {
   const [isError, setIsError] = useState(false);
 
   const handleOnEditSave = () => {
-    //expiry date not mandatory
-    if (!editedExpiryDate) {
-      onClose();
-    }
     //validate expiry date if entered
-    const result = editedExpiryDate && isDateValid(editedExpiryDate);
-    if (result) {
+    let isValidated = true;
+    if (editedExpiryDate) {
+      isValidated = isDateValid(editedExpiryDate);
+    }
+    if (isValidated) {
       const editedIngredientDetails = ingredient;
       editedIngredientDetails.expiryDate = editedExpiryDate;
       editedIngredientDetails.alcoholic = isAlcoholic;
       onSave(editedIngredientDetails);
     } else {
-      setIsError(true);
+      setIsError(true); //default error on form is date in not in required format
       return;
     }
   };
 
+  /**
+   * Method to handle expiry date input change
+   */
   const handleOnChangeExpiryDate = (event: React.BaseSyntheticEvent) => {
     setEditedExpiryDate(event.target.value);
   };
 
+  /**
+   * Method to handle isAlcoholic checkbox change
+   */
   const handleOnChangeCheckBox = () => {
     setIsAlcoholic(!isAlcoholic);
   };

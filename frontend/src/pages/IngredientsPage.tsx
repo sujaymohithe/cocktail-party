@@ -21,6 +21,7 @@ const IngredientsPage = () => {
 
   useEffect(() => {
     const storedIngredients = localStorageService.getItem(ingredients);
+    //if local storage is empty
     if (Object.keys(storedIngredients).length < 1) {
       APIService.getIngredients().then((data) => {
         //initially set localStorage
@@ -34,11 +35,19 @@ const IngredientsPage = () => {
     }
   }, []);
 
-  const handleOnEditIngredeint = (ingredient: Ingredient) => {
+  /**
+   * Method to setSelectedIngredient on click of edit ingredient
+   * @param ingredient : selected Ingredient
+   */
+  const handleOnEditIngredient = (ingredient: Ingredient) => {
     setSelectedIngredient(ingredient);
   };
 
-  const handleOnDeleteIngredeint = (deletedIngredient: Ingredient) => {
+  /**
+   * Method to delete Ingredient on click of delete ingredient
+   * @param deletedIngredient : Ingredient to be deleted
+   */
+  const handleOnDeleteIngredient = (deletedIngredient: Ingredient) => {
     const otherIngredients = myIngredients.filter(
       (ingredient: Ingredient) => ingredient.name !== deletedIngredient.name
     );
@@ -46,19 +55,28 @@ const IngredientsPage = () => {
     localStorageService.setItem(ingredients, otherIngredients);
   };
 
+  /**
+   * Method to close Edit Ingredient modal and clear selected Ingredient
+   */
   const handleOnCloseEditModal = () => {
     setSelectedIngredient(undefined);
   };
 
+  /**
+   * Method to save new Ingredient or edited Ingredient
+   * @param ingredientDetails newly added Ingredient or existing edited Ingredient
+   */
   const handleOnSaveIngredient = (ingredientDetails: Ingredient) => {
     let storedIngredients: Ingredient[] =
       localStorageService.getItem(ingredients);
     const selectedIndex = storedIngredients.findIndex(
       (ingredient) => ingredient.name === ingredientDetails.name
     );
+    //in case of edit existing ingredient
     if (selectedIndex > -1) {
       storedIngredients[selectedIndex] = ingredientDetails;
     } else {
+      //in case of addm, push new ingredient to first index
       storedIngredients = [ingredientDetails, ...storedIngredients];
     }
     setMyIngredients(storedIngredients);
@@ -68,10 +86,16 @@ const IngredientsPage = () => {
     setShowAddModal(false);
   };
 
+  /**
+   * Method to show modal on Add new ingredient
+   */
   const handleAddNewIngredient = () => {
     setShowAddModal(true);
   };
 
+  /**
+   * Method to close modal of Add new ingredient
+   */
   const handleOnCloseAddModal = () => {
     setShowAddModal(false);
   };
@@ -85,8 +109,8 @@ const IngredientsPage = () => {
       </div>
       <IngredientList
         data={myIngredients}
-        onEditIngredient={handleOnEditIngredeint}
-        onDeleteIngredient={handleOnDeleteIngredeint}
+        onEditIngredient={handleOnEditIngredient}
+        onDeleteIngredient={handleOnDeleteIngredient}
       />
 
       {selectedIngredient && (
