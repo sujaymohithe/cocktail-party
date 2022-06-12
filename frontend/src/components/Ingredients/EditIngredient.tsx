@@ -16,8 +16,8 @@ interface Props {
  * @returns JSX
  */
 const EditIngredient = ({ ingredient, onSave, onClose }: Props) => {
-  const [editedExpiryDate, setEditedExpiryDate] = useState<string | undefined>(
-    ingredient.expiryDate
+  const [editedExpiryDate, setEditedExpiryDate] = useState<string>(
+    ingredient.expiryDate ?? ""
   );
   const [isAlcoholic, setIsAlcoholic] = useState(ingredient.alcoholic);
   const [isError, setIsError] = useState(false);
